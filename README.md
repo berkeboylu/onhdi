@@ -4,6 +4,13 @@ onHDI is a web application that works for making diagrams of our inhouse app sys
 
 This repo is functionality complete — PRs and issues welcome!
 
+### Uses
+
+ - [Vis.js](https://visjs.org/) 
+ - [EasyUI](https://www.jeasyui.com/) 
+ - [Laravel](https://laravel.com/) 
+ - [MySQL](https://www.mysql.com/) 
+
 ----------
 
 # Getting started

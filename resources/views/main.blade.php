@@ -13,8 +13,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('themes/color.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('themes/icon.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('src/demo.css')}}">
-    <script type="text/javascript" src="src/jquery.min.js"></script>
-    <script type="text/javascript" src="src/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="{{asset('src/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('src/jquery.easyui.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('src/jquery.portal.js')}}"></script>
     <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}">
     
