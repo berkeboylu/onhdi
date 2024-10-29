@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/settings/change', ['App\Http\Controllers\SettingsController', 'makeChanges'])->name('api.settings.change');
 Route::get('/settings/get', ['App\Http\Controllers\SettingsController', 'getSettingsJson'])->name('api.settings.get');
-Route::post('/main/get/items', ['App\Http\Controllers\MainController', 'getAllItems'])->name('api.main.get.items');
+Route::post('/main/get/items', ['App\Http\Controllers\MainController', 'getAllItemsNew'])->name('api.main.get.items');
 
 
 Route::post('/category/add', ['App\Http\Controllers\MainController', 'addCategory'])->name('api.category.add');

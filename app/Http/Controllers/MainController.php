@@ -40,6 +40,29 @@ class MainController extends Controller
         return response()->json(array("total" => $_count, "rows" => $array), 200);
     }
     
+    public function getAllItemsNew(Request $req) {
+        
+        $Nodes = DB::table('nodes')->select('nodes.*', DB::raw('(select count(*) from connection where nodeTo = nodes.id or nodeFrom = nodes.id) as connection'), 'category.name as category_name')
+        ->leftJoin('category', 'category.id', 'nodes.category_id')
+        ->where('nodes.active', 'on')
+        ->get();
+
+        $array = [];
+        
+        foreach ($Nodes as $key => $value) {
+            array_push($array, 
+                [
+                    "inv" => $value->id,
+                    "date" => $value->created_at,
+                    "name" => $value->name,
+                    "category" => $value->category_name,
+                    "connections" => $value->connection,
+                ]);
+        }      
+
+        return response()->json(array("total" => count($array), "rows" => $array), 200);
+    }
+    
     public function addCategory(Request $req){
         $_r = $req->all();
         
@@ -80,7 +103,7 @@ class MainController extends Controller
     
     public function getTree(){
         $tree = array();
-        $categoryTree = [array("text" => "Add New Node", "iconCls" => "icon-add", "url" => "http://localhost/onhdi/public/nodes/add")];
+        $categoryTree = [array("text" => "Add New Node", "iconCls" => "icon-add", "url" => route('nodes.add'))];
         $categories = DB::table('category')->select('name', 'id')->get();
             
         //Items tree
@@ -88,7 +111,7 @@ class MainController extends Controller
             $_t = [];
             $_i = DB::table('nodes')->where('category_id', $value->id)->get();
             foreach ($_i as $it) {
-                array_push($_t, ["text" => $it->name, "url" => "http://localhost/onhdi/public/info/".$it->id, "iconCls" => ($it->active == 'off')?'icon-cancel':'icon-file']);
+                array_push($_t, ["text" => $it->name, "url" => route('view.node.id', ['id' => $it->id]), "iconCls" => ($it->active == 'off')?'icon-cancel':'icon-file']);
             }
             $_ch = [];
             array_push($categoryTree, array("text"=>$value->name, "children" => $_t, "state"=>(empty($_t))?'open':'closed'));
@@ -156,6 +179,10 @@ class MainController extends Controller
     public function ViewNode($i){
         return view('nodes.view', ['id' => $i]);
     }  
+    
+    public function InfoNode($i){
+        return view('info', ['id' => $i]);
+    } 
     
     public function dashboard(){
         $data = DB::select('SELECT 

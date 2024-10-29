@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/info', function () {return view('info');});
-Route::get('/info/{id}', ['App\Http\Controllers\MainController', 'ViewNode']);
+Route::get('/info/{id}', ['App\Http\Controllers\MainController', 'InfoNode'])->name('info.node.id');
+Route::get('/view/{id}', ['App\Http\Controllers\MainController', 'ViewNode'])->name('view.node.id');
 
 Route::get('/', function () {return view('main');});
 Route::get('/list', function () {return view('try');});

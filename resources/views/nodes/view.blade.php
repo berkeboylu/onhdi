@@ -16,6 +16,8 @@
         </tr>
     </thead>
 </table>
+<br>
+<a class="easyui-linkbutton" data-options="iconCls:'icon-graph'" href="{{route('info.node.id', ['id' => $id])}}">View Graph</a>
 
 <script>
 

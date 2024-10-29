@@ -1,8 +1,26 @@
 @extends('layouts.app')
 
 @php
-    $_NODES = DB::select(DB::raw('SELECT nodes.id as id, nodes.name as name, category.icon as icon FROM nodes, category WHERE nodes.category_id = category.id and nodes.active = \'on\';'));
-    $_EDGES = DB::select(DB::raw('SELECT * FROM connection'));
+    if (empty($id))
+    {
+      $_NODES = DB::select(DB::raw('SELECT nodes.id as id, nodes.name as name, category.icon as icon FROM nodes, category WHERE nodes.category_id = category.id and nodes.active = \'on\';'));
+      $_EDGES = DB::select(DB::raw('SELECT * FROM connection'));
+    } else {
+    $query = sprintf("SELECT nodes.id as id, nodes.name as name, category.icon as icon FROM nodes
+      LEFT JOIN category ON nodes.category_id = category.id
+      WHERE  nodes.active = 'on' and
+      (nodes.id = %s or nodes.id in 
+       ( select DISTINCT nodeTo from `connection` where nodeFrom = %s UNION ALL 
+        select DISTINCT nodeFrom from `connection` where nodeTo = %s));",$id,$id,$id);
+      
+      $_NODES = DB::select(DB::raw($query));
+      $_EDGES = DB::select(DB::raw('SELECT * FROM connection'));
+      
+      if (empty($_NODES)){
+        echo '<html><head></head><body><div>No such node.</div></body></html>';
+        return;
+      }
+    }
     
     $_cn = array_unique(array_column($_EDGES, 'connectionDesc'));
     $edgeColor = array();
@@ -11,10 +29,15 @@
     }
     
     function getHex($i, $edge){
+      $randomHex = env('RANDOM_EDGE_COLOR', 'false');
+      if ($randomHex){
         foreach ($edge as $value) {
           if ($value['name'] == $i)
             return $value['color'];
         }
+      } else {
+        return '#00f';
+      }  
     }
 @endphp
 
