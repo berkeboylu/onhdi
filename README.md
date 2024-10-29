@@ -2,7 +2,7 @@
 
 onHDI is a web application that works for making diagrams of our inhouse app system.
 
-This repo is functionality complete — PRs and issues welcome!
+This repo is totally free — PRs and issues welcome!
 
 ### Uses
 
