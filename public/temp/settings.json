@@ -1,0 +1,39 @@
+{
+    "total": 7,
+    "rows": [{
+            "name": "Name",
+            "value": "Berke Boylu",
+            "group": "Identity",
+            "editor": "text"
+        },
+        {
+            "name": "Address",
+            "value": "",
+            "group": "Identity",
+            "editor": "text"
+        },
+        {
+            "name": "License Key",
+            "value": "123131-21313-2323232AADSA",
+            "group": "Program settings",
+            "editor": "text"
+        },
+        {
+            "name": "App Theme",
+            "value": "default",
+            "group": "Program settings",
+            "editor": "text"
+        },
+        {
+            "name": "Email",
+            "value": "bill@gmail.com",
+            "group": "Marketing Settings",
+            "editor": {
+                "type": "validatebox",
+                "options": {
+                    "validType": "email"
+                }
+            }
+        }
+    ]
+}

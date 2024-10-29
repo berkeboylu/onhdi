@@ -1,0 +1,57 @@
+[{
+    "id": 1,
+    "text": "Items",
+    "iconCls": "icon-book",
+    "children": [{
+        "text": "Add New Node",
+        "checked": true,
+        "iconCls": "icon-add",
+        "url": "http://localhost/onhdi/public/nodes/add"
+    },{
+        "text": "Databases",
+        "checked": true,
+        "iconCls": "icon-help",
+        "children": [{
+            "text": "NEBULA",
+            "checked": true,
+            "url": "list.html"
+        }, {
+            "text": "HELIX",
+            "checked": true,
+            "url": "http://localhost/onhdi/public/info"
+        }, {
+            "text": "KORGUN",
+            "checked": true,
+            "url": "http://localhost/onhdi/public/list"
+        }]
+    },
+    {
+      "text": "Apps",
+      "checked": true,
+      "iconCls": "icon-tip",
+      "children": [{
+          "text": "GreyderIn",
+          "checked": true,
+          "url": "list.html"
+      }]
+  }
+    ]
+},
+{
+  "id": 2,
+  "text": "Graphs",
+  "iconCls": "icon-graph",
+  "url": "http://localhost/onhdi/public/graph"
+},
+{
+  "id": 4,
+  "text": "Nodes",
+  "iconCls": "icon-add",
+  "url": "http://localhost/onhdi/public/nodes"
+},
+{
+    "id": 3,
+    "text": "Settings",
+    "iconCls": "icon-settings",
+    "url": "http://localhost/onhdi/public/settings"
+  }]
