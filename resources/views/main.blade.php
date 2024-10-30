@@ -186,13 +186,17 @@ transform: translate(-50%, -50%) scale(50); transition: transform 2s">❤️</lo
 
 <div data-options="region:'center'">
   <div class="easyui-layout" data-options="fit:true">
+    
       <div data-options="region:'west',collapsed:false" style="width:180px">
           <div  class="left">
+            {{Auth::user()->name}}
+          <hr>
+          <br>
           <div>
               <a href="javascript:void(0)" class="easyui-linkbutton" onclick="collapseAll()">Collapse</a>
               <a href="javascript:void(0)" class="easyui-linkbutton"  onclick="expandAll()">Expand</a>
           </div>
-          <hr>
+          <br>
           <div id="menu"></div>
           </div>
       </div>
