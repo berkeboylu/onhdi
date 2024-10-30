@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
+use App\Models\Category;
+use App\Models\Node;
+use App\Models\Connection;
 
 class MainController extends Controller
 {
@@ -71,7 +75,11 @@ class MainController extends Controller
         }
             
         try {
-            DB::table('category')->insert($_r);
+            $_r["created_at"] = Carbon::now();
+            $_r["updated_at"] = Carbon::now();
+            $_r["byuserid"] = 1; //TODO: This will be taken from Auth when authentication is done.
+
+            Category::insert($_r);
         } catch (Exception $e) {
             return response($e->getMessage(), 300);
         }
@@ -81,7 +89,7 @@ class MainController extends Controller
     
     public function addNode(Request $req){
        
-        $isExist = DB::table('nodes')->select('name')->get()->pluck('name')->toArray();
+        $isExist = Node::select('name')->get()->pluck('name')->toArray();
 
         if (in_array($req->name, $isExist))
             return response('Already exist. You should edit it!', 300);
@@ -93,7 +101,10 @@ class MainController extends Controller
         }
             
         try {
-            DB::table('nodes')->insert($_r);
+            $_r["created_at"] = Carbon::now();
+            $_r["updated_at"] = Carbon::now();
+            $_r["byuserid"] = 1; 
+            Node::insert($_r);
         } catch (Exception $e) {
             return response($e->getMessage(), 300);
         }
@@ -109,7 +120,7 @@ class MainController extends Controller
         //Items tree
         foreach ($categories as $value) {
             $_t = [];
-            $_i = DB::table('nodes')->where('category_id', $value->id)->get();
+            $_i = Nodes::where('category_id', $value->id)->get();
             foreach ($_i as $it) {
                 array_push($_t, ["text" => $it->name, "url" => route('view.node.id', ['id' => $it->id]), "iconCls" => ($it->active == 'off')?'icon-cancel':'icon-file']);
             }
@@ -151,11 +162,14 @@ class MainController extends Controller
             
         if (!is_numeric($to))
             return response('"To" node selected wrongly.', 300);
-
-        DB::table('connection')->insert([
+    
+        Connection::insert([
             "nodeFrom" => $from,
             "nodeTo" => $to,
-            "connectionDesc" => $req->d
+            "connectionDesc" => $req->d,
+            "created_at" => Carbon::now(),
+            "updated_at" => Carbon::now(),
+            "byuserid" => 1
         ]);
         
         return response('Success',200);
