@@ -120,7 +120,7 @@ class MainController extends Controller
         //Items tree
         foreach ($categories as $value) {
             $_t = [];
-            $_i = Nodes::where('category_id', $value->id)->get();
+            $_i = Node::where('category_id', $value->id)->get();
             foreach ($_i as $it) {
                 array_push($_t, ["text" => $it->name, "url" => route('view.node.id', ['id' => $it->id]), "iconCls" => ($it->active == 'off')?'icon-cancel':'icon-file']);
             }

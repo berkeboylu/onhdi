@@ -99,11 +99,11 @@
 	background-size: 16px 16px;
 }
 .icon-settings{
-	background:url('icons/132773_work_machine_desktop_system_tool_application_control_preferences_reductor_gear_tools_configuration_gears_mime_contact_engineering_generator_applications_machine_desktop_system_work_tool_settings_generator_gear_reductor_control_application_pre.png') no-repeat center center;
+	background:url('icons/settings.png') no-repeat center center;
 }
 
 .icon-view{
-	background:url('icons/132615_view_view_loop_magnifying glass_magnifying_research_search_zoom_find_eye_magnifying_magnifying glass_loop_magnifier_explore_glass_research_zoom_find_eye_search_magnifier_explore_glass.png') no-repeat center center;
+	background:url('icons/search.png') no-repeat center center;
 }
 
 .icon-arrow{
