@@ -69,11 +69,9 @@
     // Create a data table with links.
     edges = [];
 
-    @for($i=1; $i < 2; $i++)
-    
     @foreach ($_NODES as $node)
       nodes.push({
-        id: {{$i+100*$node->id}},
+        id: {{$node->id}},
         label: "{{$node->name}}",
         @if(!empty($node->icon))
         shape: "image",
@@ -92,11 +90,9 @@
     @endforeach
     
     @foreach ($_EDGES as $edge)
-      edges.push({ from: {{$i+100*$edge->nodeFrom}}, to: {{$i+100*$edge->nodeTo}}, length: EDGE_LENGTH_MAIN, label: "{{$edge->connectionDesc}}", color: {color:'{{getHex($edge->connectionDesc, $edgeColor)}}',highlight: '#feba00'},title: "{{$edge->connectionDesc}}"});
+      edges.push({ from: {{$edge->nodeFrom}}, to: {{$edge->nodeTo}}, length: EDGE_LENGTH_MAIN, label: "{{$edge->connectionDesc}}", color: {color:'{{getHex($edge->connectionDesc, $edgeColor)}}',highlight: '#feba00'},title: "{{$edge->connectionDesc}}"});
     @endforeach
     
-    @endfor
-
     // create a network
     var container = document.getElementById("mynetwork");
     var data = {
