@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @php
+    $filename = 'Graph';
     if (empty($id))
     {
+      $filename = 'All Graphs';
       $_NODES = DB::select(DB::raw('SELECT nodes.id as id, nodes.name as name, category.icon as icon FROM nodes, category WHERE nodes.category_id = category.id and nodes.active = \'on\';'));
       $_EDGES = DB::select(DB::raw('SELECT * FROM connection'));
     } else {
@@ -15,6 +17,8 @@
       
       $_NODES = DB::select(DB::raw($query));
       $_EDGES = DB::select(DB::raw('SELECT * FROM connection'));
+      
+      $filename = 'Node-'.$id;
       
       if (empty($_NODES)){
         echo '<html><head></head><body><div>No such node.</div></body></html>';
@@ -29,8 +33,8 @@
     }
     
     function getHex($i, $edge){
-      $randomHex = env('RANDOM_EDGE_COLOR', 'false');
-      if ($randomHex){
+      $randomHex = Auth::user()->getPreference('randomEdgeColor');
+      if ($randomHex == 'true'){
         foreach ($edge as $value) {
           if ($value['name'] == $i)
             return $value['color'];
@@ -102,7 +106,7 @@
     var options = {
         width: (window.innerWidth - 25) + "px",
         height: (window.innerHeight - 75) + "px",
-        @if(env('ARROW') == 'TRUE')
+        @if(Auth::user()->getPreference('useArrow'))
         edges:{
           arrows: 'to'
         }
@@ -277,7 +281,7 @@ onload="draw()"
 @endsection
 
 @section('content')
-<a id="canvasImg" download="filename"></a>
+<a id="canvasImg" download="{{$filename}}"></a>
 <div id="mynetwork"><div class="vis-network" tabindex="0" style="position: relative; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 100%; height: 100%;"><canvas style="position: relative; touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 100%; height: 100%;" width="600" height="600"></canvas></div></div>
 <div id="wdesc" class="easyui-window" title="Node information" data-options="modal:true,closed:true,iconCls:'icon-help',tools:'#tt'" style="width:500px;height:400px;padding:5px;display:none">
     <div class="easyui-layout" data-options="fit:true">

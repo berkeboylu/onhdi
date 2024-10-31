@@ -9,7 +9,7 @@
         height: 100%;
       }
     </style>
-    <link rel="stylesheet" type="text/css" href="{{asset('themes/'.env('THEME', 'default').'/easyui.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('themes/'.Auth::user()->getPreference('theme').'/easyui.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('themes/color.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('themes/icon.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('src/demo.css')}}">
@@ -186,12 +186,12 @@ transform: translate(-50%, -50%) scale(50); transition: transform 2s">❤️</lo
 
 <div data-options="region:'center'">
   <div class="easyui-layout" data-options="fit:true">
-    
-      <div data-options="region:'west',collapsed:false" style="width:180px">
+            <form id="logoutForm" action="{{route('logout')}}" method="POST">@csrf</form>
+      <div class="easyui-layout" data-options="region:'west',collapsed:false" style="width:180px">
+        <div data-options="region:'south',collapsed:false" style="width:180px;overflow: hidden; ">
+          <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo'" onclick="$('#dlglgt').dialog('open')">Logout</a>
+        </div>
           <div  class="left">
-            {{Auth::user()->name}}
-          <hr>
-          <br>
           <div>
               <a href="javascript:void(0)" class="easyui-linkbutton" onclick="collapseAll()">Collapse</a>
               <a href="javascript:void(0)" class="easyui-linkbutton"  onclick="expandAll()">Expand</a>
@@ -233,6 +233,27 @@ transform: translate(-50%, -50%) scale(50); transition: transform 2s">❤️</lo
        </div>
       </div>
   </div>
+  
+  <div id="dlglgt" class="easyui-dialog" title="Logout" style="width:400px;height:200px;padding:10px"
+            data-options="
+                iconCls: 'icon-undo',
+                buttons: [{
+                    text:'Logout',
+                    iconCls:'icon-no',
+                    handler:function(){
+                        $('#logoutForm').submit();
+                    }
+                },{
+                    text:'Cancel',
+                    handler:function(){
+                        $('#dlglgt').dialog('close');
+                    }
+                }],
+                closed:true
+            ">
+        Do you want to logout?
+    </div>
+    
 </div>
 </body>
 </html>

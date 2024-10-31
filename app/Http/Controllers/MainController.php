@@ -133,6 +133,7 @@ class MainController extends Controller
         array_push($tree, array("id"=> 2, "text"=> "Graphs", "iconCls" => "icon-graph","url"=> route('view.graph')));
         //array_push($tree, array("id"=> 3, "text"=> "Nodes", "iconCls" => "icon-add"));
         array_push($tree, array("id"=> 4, "text"=> "Settings", "iconCls" => "icon-settings", "url" => route('view.settings')));
+        array_push($tree, array("id"=> 4, "text"=> "Profile", "iconCls" => "icon-user", "url" => route('auth.profile')));
         
         return $tree;
         

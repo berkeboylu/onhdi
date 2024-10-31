@@ -20,10 +20,26 @@ class SettingsController extends Controller
     public function makeChanges(Request $req) {
         $request = $req->changes;
         $changes = json_decode($request);
-        
-        
-                
-        $theme_array =  ['black', 'bootstrap', 'default', 'gray', 'material', 'material-blue', 'material-teal', 'metro'];
+ 
+        $theme_array =  [
+            'bootstrap',
+            'default',
+            'gray',
+            'icons',
+            'material',
+            'material-blue',
+            'material-teal',
+            'metro',
+            'metro-blue',
+            'metro-gray',
+            'metro-green',
+            'metro-orange',
+            'metro-red',
+            'ui-cupertino',
+            'ui-dark-hive',
+            'ui-pepper-grinder',
+            'ui-sunny'
+        ];
         
         foreach ($changes as $value) {
             switch ($value[0]) {
@@ -57,14 +73,23 @@ class SettingsController extends Controller
         $_rows = [];
         
         $themes = array(
-            array("id"=> "default", "desc"=> "default"),
-            array('id'=> 'black', "desc"=> 'black'),
-            array('id'=> 'bootstrap', "desc"=> 'bootstrap'),
-            array('id'=> 'gray', "desc"=> 'gray', ),
-            array('id'=> 'material', "desc"=> 'material'),
-            array('id'=> 'material-blue', "desc"=> 'material-blue'),
-            array('id'=> 'material-teal', "desc"=> 'material-teal'),
-            array('id'=> 'metro', "desc"=> 'metro')
+            array("id"=> 'bootstrap', "desc" => 'bootstrap'),
+            array("id"=> 'default', "desc" => 'default'),
+            array("id"=> 'gray', "desc" => 'gray'),
+            array("id"=> 'icons', "desc" => 'icons'),
+            array("id"=> 'material', "desc" => 'material'),
+            array("id"=> 'material-blue', "desc" => 'material-blue'),
+            array("id"=> 'material-teal', "desc" => 'material-teal'),
+            array("id"=> 'metro', "desc" => 'metro'),
+            array("id"=> 'metro-blue', "desc" => 'metro-blue'),
+            array("id"=> 'metro-gray', "desc" => 'metro-gray'),
+            array("id"=> 'metro-green', "desc" => 'metro-green'),
+            array("id"=> 'metro-orange', "desc" => 'metro-orange'),
+            array("id"=> 'metro-red', "desc" => 'metro-red'),
+            array("id"=> 'ui-cupertino', "desc" => 'ui-cupertino'),
+            array("id"=> 'ui-dark-hive', "desc" => 'ui-dark-hive'),
+            array("id"=> 'ui-pepper-grinder', "desc" => 'ui-pepper-grinder'),
+            array("id"=> 'ui-sunny', "desc" => 'ui-sunny')
         );
         
         $arrow = array(

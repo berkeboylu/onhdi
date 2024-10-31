@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0086)https://visjs.github.io/vis-network/examples/network/nodeStyles/imagesWithOpacity.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="{{asset('themes/'.env('THEME', 'default').'/easyui.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('themes/'.Auth::user()->getPreference('theme').'/easyui.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('themes/icon.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('src/demo.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('themes/color.css')}}">
